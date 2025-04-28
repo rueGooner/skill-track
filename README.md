@@ -6,14 +6,13 @@
 
 ## 🏗️ Project Structure
 
-This is a **monorepo** containing:
+This is a **repo** containing:
 
 | Folder              | Description                            |
 |---------------------|----------------------------------------|
 | `/server`        | NestJS backend (API, Auth, Skill APIs) |
 | `/client-user`   | Next.js frontend for users             |
 | `/client-admin`  | Next.js frontend for admins            |
-| `/packages/common`    | Shared types, utils, and constants     |
 
 ---
 
@@ -40,7 +39,7 @@ This is a **monorepo** containing:
 
 ## 🛣️ Roadmap
 
-- [x] Setup monorepo structure
+- [x] Setup repo structure
 - [ ] Scaffold NestJS server with Auth
 - [ ] Scaffold Next.js user client
 - [ ] Connect frontend to backend (REST/GraphQL)

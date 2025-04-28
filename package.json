@@ -1,0 +1,20 @@
+{
+  "name": "skill-track",
+  "version": "1.0.0",
+  "description": "**SkillTrack** is my fullstack growth tracking platform, helping users build skills, maintain practice streaks, and visualize their progress over time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rueGooner/skill-track.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rueGooner/skill-track/issues"
+  },
+  "homepage": "https://github.com/rueGooner/skill-track#readme"
+}
