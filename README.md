@@ -40,7 +40,7 @@ This is a **monorepo** containing:
 
 ## 🛣️ Roadmap
 
-- [ ] Setup monorepo structure
+- [x] Setup monorepo structure
 - [ ] Scaffold NestJS server with Auth
 - [ ] Scaffold Next.js user client
 - [ ] Connect frontend to backend (REST/GraphQL)
