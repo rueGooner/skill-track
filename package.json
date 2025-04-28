@@ -7,9 +7,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "concurrently": "^8.0.0"
+    "concurrently": "^8.2.2"
   },
   "scripts": {
+    "dev:server": "concurrently \"pnpm --filter server dev\"",
     "dev": "concurrently \"pnpm --filter server dev\" \"pnpm --filter client-user dev\" \"pnpm --filter client-admin dev\""
   },
   "keywords": [],
