@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    container_name: skill-track-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin-rue
+      POSTGRES_PASSWORD: i6a8uejKJc!!
+      POSTGRES_DB: skill-track
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
