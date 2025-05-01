@@ -17,8 +17,7 @@
     "url": "https://github.com/rueGooner/skill-track/issues"
   },
   "homepage": "https://github.com/rueGooner/skill-track#readme",
-  "devDependencies": {
-  },
   "dependencies": {
+    "@nestjs/swagger": "^11.1.5"
   }
 }
