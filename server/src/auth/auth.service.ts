@@ -1,28 +1,37 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { PrismaService } from 'src/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { User } from '@prisma/client';
+import { ConfigService } from '@nestjs/config';
+import { config } from 'process';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prisma: PrismaService, private jwtService: JwtService) {}
-  create(registerPayload: RegisterDto) {
-    return 'This action adds a new auth';
+  constructor(private readonly prisma: PrismaService, private jwtService: JwtService, private configService: ConfigService) {}
+
+  async login(loginPayload: LoginDto) {
+    const existingUser = await this.validateUserCredentials(loginPayload);
+    if (!existingUser) throw new UnauthorizedException('Invalid credentials');
+
+    const payload = { sub: existingUser.id, email: existingUser.email, role: existingUser.role };
+
+    const access_token = await this.jwtService.signAsync(payload, 
+      {
+        secret: this.configService.get<string>('JWT_SECRET'),
+      }
+    );
+
+    return { access_token };
   }
 
   async register(registerPayload: RegisterDto) { 
-    const { email, password } = registerPayload;
-
-    const existingUser = await this.prisma.user.findUnique({
-      where: {
-        email
-      }
-    });
+    const existingUser = await this.validateUserCredentials(registerPayload);
 
     if (existingUser) throw new ConflictException('Email is already registered.');
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(registerPayload.password, 10);
 
     const newUser = await this.prisma.user.create({
       data: {
@@ -52,5 +61,21 @@ export class AuthService {
 
   remove(id: number) {
     return `This action removes a #${id} auth`;
+  }
+
+  async validateUserCredentials({email, password }: LoginDto | RegisterDto): Promise<User | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email
+      }
+    });
+
+    if (!user) return null;
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) return null;
+
+    return user;
   }
 }
