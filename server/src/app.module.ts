@@ -9,21 +9,7 @@ import { UsersModule } from './users/users.module';
 @Module({
   imports: [
     AuthModule,
-    JwtModule.registerAsync({
-      imports: [
-        ConfigModule.forRoot({
-          isGlobal: true,
-        }),
-      ],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
-        console.log('JWT_SECRET_HERE', configService.get<string>('JWT_SECRET'));
-        return {
-          secret: configService.get<string>('JWT_SECRET'),
-          signOptions: { expiresIn: '1d' },
-        };
-      },
-    }),
+    
     UsersModule,
   ],
   controllers: [AppController],

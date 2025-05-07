@@ -8,6 +8,10 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
+  async myProfile() {
+    return `This action returns my profile`;
+  }
+
   findAll() {
     return `This action returns all users`;
   }
